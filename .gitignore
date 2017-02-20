@@ -8,6 +8,7 @@ local_settings.py
 monitor_temp/
 logs/*.log*
 venv/
+shell/
 __pycache__/
 .coverage
 *.py[co]
