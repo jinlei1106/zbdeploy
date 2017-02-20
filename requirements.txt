@@ -1,0 +1,8 @@
+Django==1.9
+django-extensions==1.7.2
+django-filter==0.14.0
+djangorestframework==3.4.4
+gunicorn==19.6.0
+requests==2.11.1
+six==1.10.0
+uWSGI==2.0.12
