@@ -16,10 +16,25 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+from django.views.generic import TemplateView
 
 from .routers import router
+from .models import Project
+
+
+class HomePageView(TemplateView):
+    template_name = 'home.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(HomePageView, self).get_context_data(**kwargs)
+        projects = []
+        for project in Project.objects.all():
+            projects.append({'code': project.code, 'name': project.name})
+        context.update({'projects': projects})
+        return context
 
 urlpatterns = [
+    url(r'^$', HomePageView.as_view(), name='home'),
     url(r'^admin/', admin.site.urls),
     url(r'^deploy/api/', include(router.urls)),
 ]
