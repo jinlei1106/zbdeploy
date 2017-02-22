@@ -29,7 +29,12 @@ class HomePageView(TemplateView):
         context = super(HomePageView, self).get_context_data(**kwargs)
         projects = []
         for project in Project.objects.all():
-            projects.append({'code': project.code, 'name': project.name})
+            projects.append({
+                'code': project.code,
+                'name': project.name,
+                'host': project.host,
+                'branch': project.branch
+            })
         context.update({'projects': projects})
         return context
 

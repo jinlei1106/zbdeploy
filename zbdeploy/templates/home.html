@@ -4,13 +4,53 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
+        <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+	    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
         <title>线上项目部署</title>
-
     </head>
+    <style type="text/css">
+        .project-list {
+            margin-top: 50px;
+        }
+    	.table-hover {
+    	    font-size: 16px;
+    	    margin-left: 50px;
+    	    margin-top: 30px;
+    	    margin-right: 50px;
+    	}
+    	#deploy {
+    	    height: 30px;
+    	    width: 100px;
+    	    padding: 3px 12px;
+    	}
+	</style>
     <body>
-        {% for project in projects %}
-        <p value="{{ project.code }}">{{ project.name }}</p>
-        {% endfor %}
+        <div class="common-list project-list">
+            <div class="tab-title" align="center">
+                <h2>项目信息</h2>
+            </div>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th class="col-md-1">项目名称</th>
+                        <th class="col-md-1">主机地址</th>
+                        <th class="col-md-1">分支</th>
+                        <th class="col-md-1"></th>
+                    </tr>
+                </thead>
+                <tbody id="content">
+                    {% for project in projects %}
+                    <tr>
+                        <td>{{ project.name }}</td>
+                        <td>{{ project.host }}</td>
+                        <td>{{ project.branch }}</td>
+                        <td>
+                            <button type="button" class="btn btn-warning" id="deploy" value="{{project.code}}">部署</button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
     </body>
 </html>
