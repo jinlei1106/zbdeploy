@@ -18,7 +18,7 @@
     	    margin-top: 30px;
     	    margin-right: 50px;
     	}
-    	#deploy {
+    	.btn-warning {
     	    height: 30px;
     	    width: 100px;
     	    padding: 3px 12px;
@@ -45,12 +45,29 @@
                         <td>{{ project.host }}</td>
                         <td>{{ project.branch }}</td>
                         <td>
-                            <button type="button" class="btn btn-warning" id="deploy" value="{{project.code}}">部署</button>
+                            <button type="button" class="btn btn-warning" value="{{project.code}}">部署</button>
                         </td>
                     </tr>
                     {% endfor %}
                 </tbody>
             </table>
         </div>
+    <script>
+        function deploy(url) {
+            $.getJSON(url).done(function (data) {
+                if (data.message === '成功') {
+                    alert('部署完成');
+                    $('.btn-warning').text('部署');
+                    return;
+                }
+            })
+        }
+        $('.btn-warning').click(function () {
+            var code = $(this).attr('value');
+            var url = "/deploy/api/deploy/" + code + "/";
+            $(this).text('部署中');
+            deploy(url);
+        })
+    </script>
     </body>
 </html>
